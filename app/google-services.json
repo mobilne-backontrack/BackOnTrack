@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "557550187273",
+    "firebase_url": "https://backontrack-fffda.firebaseio.com",
+    "project_id": "backontrack-fffda",
+    "storage_bucket": "backontrack-fffda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557550187273:android:68eacb1b8b3e20c5",
+        "android_client_info": {
+          "package_name": "pl.mobile.backontrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557550187273-sj2kr5u1u9ttfrboga0q788rf995scv7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.mobile.backontrack",
+            "certificate_hash": "d6261ca06f28e1c847fd1ee0870dd712e76e407d"
+          }
+        },
+        {
+          "client_id": "557550187273-qel6vmetnpqsqog01093dlhe6e03erjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-MNREOEt3uVvGIJvjTbFaT5pgvdeL5n0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557550187273-qel6vmetnpqsqog01093dlhe6e03erjb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

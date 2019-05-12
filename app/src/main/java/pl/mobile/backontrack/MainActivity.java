@@ -1,5 +1,6 @@
 package pl.mobile.backontrack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -48,5 +49,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void taskClick(View view) {
+        Intent intent;
+        switch (view.getId())
+        {
+            case R.id.taskBtn:
+                intent = new Intent(MainActivity.this, TaskActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

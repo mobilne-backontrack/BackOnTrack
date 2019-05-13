@@ -3,4 +3,5 @@
     <string name="action_settings">Settings</string>
     <string name="task">Dodaj zadanie</string>
     <string name="taskName">Wpisz nazwę zadania</string>
+    <string name="sign_out">Wyloguj</string>
 </resources>

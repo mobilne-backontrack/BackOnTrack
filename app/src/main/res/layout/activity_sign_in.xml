@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="87dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        android:layout_marginTop="@dimen/medium_margin"/>
+    </LinearLayout>
+
+    <pl.krakow.uek.customfont.LatoTextView
+        android:id="@+id/sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/header_text_size"
+        android:layout_below="@+id/logo"
+        android:layout_marginRight="@dimen/layout_box_margin"
+        android:layout_marginLeft="@dimen/layout_box_text_margin"
+        android:layout_marginStart="@dimen/layout_box_text_margin"
+        android:layout_marginEnd="@dimen/layout_box_text_margin"
+        android:layout_marginTop="@dimen/layout_box_margin" />
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sign_in"
+        android:layout_marginRight="@dimen/layout_box_margin"
+        android:layout_marginLeft="@dimen/layout_box_margin"
+        android:layout_marginTop="@dimen/layout_box_margin"
+        android:orientation="vertical">
+
+        <pl.krakow.uek.customfont.LatoTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <pl.krakow.uek.customfont.LatoEditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/invisible"
+                android:hint="@string/username"
+                android:inputType="text"
+                android:paddingLeft="@dimen/layout_text_margin"
+                android:paddingStart="@dimen/layout_text_margin"
+                android:paddingEnd="@dimen/layout_text_margin"
+                android:paddingRight="@dimen/layout_text_margin"
+                android:paddingTop="@dimen/layout_text_margin"
+                android:textColorHint="@color/hintColor"
+                android:textSize="@dimen/text_size" />
+        </pl.krakow.uek.customfont.LatoTextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_width"
+            android:background="@color/colorSeparator"
+            android:layout_marginTop="@dimen/separator_margin"
+            android:layout_marginBottom="@dimen/separator_margin" />
+
+        <pl.krakow.uek.customfont.LatoTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <pl.krakow.uek.customfont.LatoEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/long_margin"
+                android:background="@color/invisible"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/layout_text_margin"
+                android:paddingStart="@dimen/layout_text_margin"
+                android:paddingRight="@dimen/layout_text_margin"
+                android:paddingEnd="@dimen/layout_text_margin"
+                android:paddingTop="@dimen/layout_text_margin"
+                android:textColorHint="@color/hintColor"
+                android:textSize="@dimen/text_size" />
+
+        </pl.krakow.uek.customfont.LatoTextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_width"
+            android:background="@color/colorSeparator"
+            android:layout_marginTop="@dimen/separator_margin"
+            android:layout_marginBottom="@dimen/separator_margin" />
+
+        <pl.krakow.uek.customfont.LatoTextView
+            android:id="@+id/c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/round"
+            android:gravity="center"
+            android:onClick="signInButtonListener"
+            android:padding="@dimen/long_padding"
+            android:text="@string/sign_in"
+            android:textColor="@color/colorButtonText"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/layout_box_margin" >
+
+        <pl.krakow.uek.customfont.LatoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dont_have_account"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:textColor="@color/colorPrimary"/>
+
+        <pl.krakow.uek.customfont.LatoTextView
+            android:id="@+id/create_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_text_margin"
+            android:background="@drawable/empty_round"
+            android:gravity="center"
+            android:onClick="signUpButtonListener"
+            android:padding="@dimen/long_padding"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorButtonBackground"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

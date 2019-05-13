@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <pl.krakow.uek.customfont.LatoTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/user_details"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/header_text_size"
+        android:paddingStart="@dimen/layout_box_text_margin"
+        android:paddingLeft="@dimen/layout_box_text_margin"
+        android:paddingEnd="@dimen/layout_box_text_margin"
+        android:paddingRight="@dimen/layout_box_text_margin"
+        android:layout_marginTop="@dimen/layout_box_margin" />
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginRight="@dimen/layout_box_margin"
+        android:layout_marginLeft="@dimen/layout_box_margin"
+        android:layout_marginTop="@dimen/layout_box_margin"
+        android:orientation="vertical" >
+
+
+        <!-- FIRST NAME -->
+        <pl.krakow.uek.customfont.LatoTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <pl.krakow.uek.customfont.LatoEditText
+                android:id="@+id/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/invisible"
+                android:hint="@string/first_name"
+                android:inputType="textCapSentences"
+                android:paddingStart="@dimen/layout_text_margin"
+                android:paddingLeft="@dimen/layout_text_margin"
+                android:paddingEnd="@dimen/layout_text_margin"
+                android:paddingRight="@dimen/layout_text_margin"
+                android:paddingTop="@dimen/layout_text_margin"
+                android:textColorHint="@color/hintColor"
+                android:textSize="@dimen/text_size" />
+        </pl.krakow.uek.customfont.LatoTextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_width"
+            android:background="@color/colorSeparator"
+            android:layout_marginTop="@dimen/separator_margin"
+            android:layout_marginBottom="@dimen/separator_margin" />
+
+        <!-- LAST NAME -->
+        <pl.krakow.uek.customfont.LatoTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <pl.krakow.uek.customfont.LatoEditText
+                android:id="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/invisible"
+                android:hint="@string/last_name"
+                android:inputType="textCapSentences"
+                android:paddingStart="@dimen/layout_text_margin"
+                android:paddingLeft="@dimen/layout_text_margin"
+                android:paddingEnd="@dimen/layout_text_margin"
+                android:paddingRight="@dimen/layout_text_margin"
+                android:paddingTop="@dimen/layout_text_margin"
+                android:textColorHint="@color/hintColor"
+                android:textSize="@dimen/text_size" />
+        </pl.krakow.uek.customfont.LatoTextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_width"
+            android:background="@color/colorSeparator"
+            android:layout_marginTop="@dimen/separator_margin"
+            android:layout_marginBottom="@dimen/separator_margin" />
+
+        <!-- PHONE NUMBER -->
+        <pl.krakow.uek.customfont.LatoTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <pl.krakow.uek.customfont.LatoEditText
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/invisible"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:paddingStart="@dimen/layout_text_margin"
+                android:paddingLeft="@dimen/layout_text_margin"
+                android:paddingEnd="@dimen/layout_text_margin"
+                android:paddingRight="@dimen/layout_text_margin"
+                android:paddingTop="@dimen/layout_text_margin"
+                android:textColorHint="@color/hintColor"
+                android:textSize="@dimen/text_size" />
+        </pl.krakow.uek.customfont.LatoTextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_width"
+            android:background="@color/colorSeparator"
+            android:layout_marginTop="@dimen/separator_margin"
+            android:layout_marginBottom="@dimen/separator_margin" />
+
+    </LinearLayout>
+
+    <pl.krakow.uek.customfont.LatoTextView
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/terms_agreement"
+        android:textColor="@color/hintColor"
+        android:gravity="center"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="@dimen/layout_box_margin" />
+</RelativeLayout>

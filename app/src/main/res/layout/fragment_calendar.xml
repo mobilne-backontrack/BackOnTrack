@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#FFFFFF"
+            android:id="@+id/calendar_card"
+            app:cardElevation="1dp">
+
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/task_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/calendar_card"
+            android:background="@color/colorBackgroundWhite"
+            android:clipToPadding="false"
+            android:dividerHeight="0dp"
+            android:paddingLeft="@dimen/layout_box_margin"
+            android:paddingRight="@dimen/layout_box_margin"
+            tools:listitem="@layout/fragment_task"
+            android:scrollbars="none" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:tint="@android:color/white"
+        app:srcCompat="@drawable/ic_outline_add" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

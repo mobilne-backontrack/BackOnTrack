@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="@dimen/layout_box_margin"
+        android:layout_marginTop="@dimen/layout_box_margin"
+        android:layout_marginRight="@dimen/layout_box_margin"
+        android:orientation="vertical">
+
+
+        <!-- NAME -->
+        <pl.krakow.uek.customfont.LatoTextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <pl.krakow.uek.customfont.LatoEditText
+                android:id="@+id/task_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/invisible"
+                android:hint="@string/task_name"
+                android:inputType="textCapSentences"
+                android:paddingStart="@dimen/layout_text_margin"
+                android:paddingLeft="@dimen/layout_text_margin"
+                android:paddingTop="@dimen/layout_text_margin"
+                android:paddingEnd="@dimen/layout_text_margin"
+                android:paddingRight="@dimen/layout_text_margin"
+                android:textColorHint="@color/hintColor"
+                android:textSize="@dimen/text_size" />
+        </pl.krakow.uek.customfont.LatoTextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_width"
+            android:layout_marginTop="@dimen/separator_margin"
+            android:layout_marginBottom="@dimen/separator_margin"
+            android:background="@color/colorSeparator" />
+
+        <!-- NOTIFICATION -->
+        <pl.krakow.uek.customfont.LatoSwitch
+            android:id="@id/notification"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/notification"
+            android:layout_marginTop="@dimen/layout_box_margin"
+            android:paddingStart="@dimen/layout_text_margin"
+            android:paddingLeft="@dimen/layout_text_margin"
+            android:paddingEnd="@dimen/layout_text_margin"
+            android:paddingRight="@dimen/layout_text_margin"/>
+
+        <!-- TAG -->
+        <pl.krakow.uek.customfont.LatoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_text_margin"
+            android:paddingTop="@dimen/layout_box_margin"
+            android:text="@string/tag"
+            android:textColor="@color/hintColor"
+            android:textSize="@dimen/header_item_text_size" />
+
+        <com.hootsuite.nachos.NachoTextView
+            android:id="@+id/tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:chipSpacing="2dp"
+            app:chipBackground="@color/chip_material_background"
+            app:chipTextColor="@color/ms_black"
+            app:chipTextSize="@dimen/text_size"
+            app:chipHeight="20dp"
+            android:textSize="@dimen/text_size"
+            />
+
+
+        <!-- Date time -->
+        <pl.krakow.uek.customfont.LatoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/layout_text_margin"
+            android:paddingTop="@dimen/layout_box_margin"
+            android:paddingEnd="@dimen/layout_text_margin"
+            android:text="@string/date"
+            android:textColor="@color/hintColor"
+            android:textSize="@dimen/header_item_text_size" />
+
+        <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            app:picker_curved="true"
+            app:picker_cyclic="true"
+            app:picker_visibleItemCount="7"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme"
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                app:theme="@style/ToolBarStyle">
+
+                <pl.krakow.uek.customfont.LatoTextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/task"
+                    android:textColor="@color/colorLightGray"
+                    android:textSize="@dimen/header_text_size" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.stepstone.stepper.StepperLayout
+            android:id="@+id/stepperLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:ms_activeStepColor="@color/colorAccent"
+            app:ms_backButtonColor="@color/colorPrimary"
+            app:ms_backButtonText="@string/back"
+            app:ms_completeButtonColor="@color/colorPrimary"
+            app:ms_completeButtonText="@string/save"
+            app:ms_nextButtonColor="@color/colorPrimary"
+            app:ms_nextButtonText="@string/next"
+            app:ms_stepperType="dots" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

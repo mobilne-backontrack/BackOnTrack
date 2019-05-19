@@ -25,6 +25,7 @@
 
     <!-- DRAWER -->
     <string name="home">Home</string>
+    <string name="today_task">Today tasks</string>
     <string name="calendar">Calendar</string>
     <string name="scanner">Scanner</string>
 
@@ -34,6 +35,7 @@
     <string name="date">Date</string>
     <string name="tag">Tag</string>
     <string name="notification">Notification</string>
+    <string name="filter">Filter</string>
 
     <!-- TASK -->
     <string name="action_settings">Settings</string>

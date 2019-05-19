@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -31,15 +30,12 @@
                 android:text="@string/home"
                 android:textColor="@color/colorLightGray"
                 android:textSize="@dimen/header_text_size" />
-            <!--
-                            <SearchView
-                                android:id="@+id/searchView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:iconifiedByDefault="true"
-                                android:queryHint="Search"
-                                android:layout_centerHorizontal="true" />-->
+
+
+
         </androidx.appcompat.widget.Toolbar>
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
@@ -48,6 +44,3 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 </LinearLayout>
-    <!--
-    </android.support.constraint.ConstraintLayout>
-    -->

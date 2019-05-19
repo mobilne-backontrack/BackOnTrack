@@ -2,6 +2,7 @@ package pl.krakow.uek.view.menu;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -9,7 +10,7 @@ import pl.krakow.uek.R;
 
 
 public enum DrawerMenuItem {
-    DASHBOARD(R.string.home, R.drawable.ic_home_outline_grey),
+    TODAY_TASKS(R.string.home, R.drawable.ic_home_outline_grey),
     CALENDAR(R.string.calendar, R.drawable.ic_outline_calendar),
     SCANNER(R.string.scanner, R.drawable.ic_outline_camera),
     EMPTY(0, 0),

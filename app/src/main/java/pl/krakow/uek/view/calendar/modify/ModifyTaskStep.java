@@ -24,7 +24,7 @@ import pl.krakow.uek.view.calendar.dummy.TaskContent;
 
 public class ModifyTaskStep extends Fragment implements Step {
 
-    private static final String[] suggestions = new String[]{"Tortilla Chips", "Melted Cheese", "Salsa", "Guacamole", "Mexico", "Jalapeno"};
+    public static final String[] suggestions = new String[]{"Tortilla Chips", "Melted Cheese", "Salsa", "Guacamole", "Mexico", "Jalapeno"};
 
     private NachoTextView nachoTextView;
     private LatoEditText taskNameEditText;

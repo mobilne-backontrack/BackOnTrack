@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.krakow.uek">
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.calendar.modify.ModifyTaskActivity"></activity>
+        <activity android:name=".view.calendar.CalendarFilterActivity"></activity>
+        <activity android:name=".view.calendar.modify.ModifyTaskActivity" />
         <activity
             android:name=".view.auth.signin.SignInActivity"
             android:label="@string/app_name">
@@ -26,7 +29,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.auth.signin.SignInActivity" />
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

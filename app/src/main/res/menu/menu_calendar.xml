@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/task_filter"
+        android:icon="@drawable/ic_baseline_filter_list"
+        android:orderInCategory="100"
+        android:title="@string/filter"
+        app:iconTint="#FFFFFF"
+        appcompat:showAsAction="always" />
+
+</menu>

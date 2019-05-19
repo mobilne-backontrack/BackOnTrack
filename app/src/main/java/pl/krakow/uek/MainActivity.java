@@ -21,16 +21,16 @@ import java.util.List;
 
 import pl.krakow.uek.view.auth.signin.SignInActivity;
 import pl.krakow.uek.view.calendar.CalendarFragment;
-import pl.krakow.uek.view.home.HomeFragment;
 import pl.krakow.uek.view.menu.DrawerAdapter;
 import pl.krakow.uek.view.menu.DrawerItem;
 import pl.krakow.uek.view.menu.DrawerMenuItem;
+import pl.krakow.uek.view.todaytasks.TodayTasksFragment;
 
 public class MainActivity extends AppCompatActivity
         implements DrawerAdapter.OnItemSelectedListener {
 
     private DrawerMenuItem[] menuItems = {
-            DrawerMenuItem.DASHBOARD,
+            DrawerMenuItem.TODAY_TASKS,
             DrawerMenuItem.CALENDAR,
             DrawerMenuItem.SCANNER,
             DrawerMenuItem.EMPTY,
@@ -95,9 +95,9 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, SignInActivity.class);
             startActivity(intent);
             finish();
-        } else if (menuItems[position] == DrawerMenuItem.DASHBOARD) {
-            Fragment home = new HomeFragment();
-            showFragment(home);
+        } else if (menuItems[position] == DrawerMenuItem.TODAY_TASKS) {
+            Fragment todayTasksFragment = new TodayTasksFragment();
+            showFragment(todayTasksFragment);
         } else if (menuItems[position] == DrawerMenuItem.CALENDAR) {
             Fragment calendar = new CalendarFragment();
             showFragment(calendar);
@@ -129,5 +129,4 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         moveTaskToBack(true);
     }
-
 }

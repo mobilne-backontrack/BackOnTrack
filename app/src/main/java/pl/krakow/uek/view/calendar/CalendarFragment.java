@@ -74,9 +74,7 @@ public class CalendarFragment extends Fragment {
                 // EditText editText = (EditText) findViewById(R.id.editText);
                 //String message = editText.getText().toString();
                 //intent.putExtra(EXTRA_MESSAGE, message);
-                //startActivity(intent);
-                startActivityForResult(intent, 1);
-
+                startActivity(intent);
             }
         });
         initCalendar(view);

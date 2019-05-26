@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1021764412100",
+    "firebase_url": "https://backontrack-44583.firebaseio.com",
+    "project_id": "backontrack-44583",
+    "storage_bucket": "backontrack-44583.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021764412100:android:79aabfd5f3b08dbb",
+        "android_client_info": {
+          "package_name": "pl.krakow.uek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021764412100-i82anc200omdfp287lg2q1hsuu93s4p6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.krakow.uek",
+            "certificate_hash": "d6261ca06f28e1c847fd1ee0870dd712e76e407d"
+          }
+        },
+        {
+          "client_id": "1021764412100-uvd56jrc1uii8iqupk0ate2dta0bi636.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgxwgNeeiskiqGRoQ-fCWgG2yKaONAICs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021764412100-uvd56jrc1uii8iqupk0ate2dta0bi636.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

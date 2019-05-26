@@ -19,10 +19,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.hootsuite.nachos.NachoTextView;
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import pl.krakow.uek.R;
+import pl.krakow.uek.customfont.LatoEditText;
+import pl.krakow.uek.customfont.LatoSwitch;
 import pl.krakow.uek.customfont.LatoTextView;
 import pl.krakow.uek.view.calendar.dummy.TaskContent;
 import pl.krakow.uek.view.calendar.modify.ModifyTaskActivity;
@@ -32,15 +46,24 @@ public class CalendarFragment extends Fragment {
 
     private CalendarView calendarView;
     public final static String ID = "id";
+    private RecyclerView recyclerView;
+    private InvoiceItemRecyclerViewAdapter invoiceItemRecyclerViewAdapter;
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private Query query;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-
-        RecyclerView recyclerView = view.findViewById(R.id.task_list);
+        recyclerView = view.findViewById(R.id.task_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new InvoiceItemRecyclerViewAdapter(TaskContent.ITEMS));
+
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String strDate = dateFormat.format(date);
+        initDatabase(strDate);
+
         setHasOptionsMenu(true);
 
         FloatingActionButton fab = view.findViewById(R.id.add_task);
@@ -52,7 +75,6 @@ public class CalendarFragment extends Fragment {
                 //String message = editText.getText().toString();
                 //intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);
-
             }
         });
         initCalendar(view);
@@ -66,9 +88,45 @@ public class CalendarFragment extends Fragment {
 
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                //TODO: ADD LOAD ITEMS ON CHANGE
+                String date = getFormattedDate(year, month+1, dayOfMonth);
+                initDatabase(date);
             }
         });
+    }
+
+    private void initDatabase(String date) {
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        query = mFirebaseDatabase.getReference().child("taskItems").orderByChild("date").startAt(date).endAt(date + "\uf8ff");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void showData(DataSnapshot dataSnapshot) {
+        List<TaskContent.TaskItem> items = new ArrayList<>();
+        for (DataSnapshot ds : dataSnapshot.getChildren())
+        {
+            TaskContent.TaskItem item = ds.getValue(TaskContent.TaskItem.class);
+            items.add(item);
+        }
+
+        invoiceItemRecyclerViewAdapter = new InvoiceItemRecyclerViewAdapter(items);
+        recyclerView.setAdapter(invoiceItemRecyclerViewAdapter);
+    }
+
+    private String getFormattedDate(int year, int month, int dayOfMonth) {
+        String mm = month < 10 ? "0" + month : String.valueOf(month);
+        String dd = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+        String date = year + "/" + mm + "/" + dd;
+        return date;
     }
 
     @Override
@@ -100,13 +158,52 @@ public class CalendarFragment extends Fragment {
         initNachoTextView(dialog);
 
         LatoTextView filterButton = dialog.findViewById(R.id.filter_button);
+        final LatoEditText taskNameEditText = dialog.findViewById(R.id.task_name);
+        final LatoSwitch notificationSwitch = dialog.findViewById(R.id.notification);
+        final NachoTextView nachoTextView = dialog.findViewById(R.id.tag);
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initDatabaseByFilter(taskNameEditText.getText().toString(), notificationSwitch.isChecked(), nachoTextView.getChipValues());
                 dialog.dismiss();
             }
         });
         dialog.show();
+    }
+
+    private void initDatabaseByFilter(String name, final boolean notification, final List<String> tag) {
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        query = mFirebaseDatabase.getReference().child("taskItems").orderByChild("name").equalTo(name);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                showDataByFilter(dataSnapshot, notification, tag);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void showDataByFilter(DataSnapshot dataSnapshot, boolean notification, List<String> tag) {
+        List<TaskContent.TaskItem> filteredItems = new ArrayList<>();
+        for (DataSnapshot ds : dataSnapshot.getChildren())
+        {
+            TaskContent.TaskItem item = ds.getValue(TaskContent.TaskItem.class);
+            if (item.getNotification() != notification)
+                continue;
+            if (item.getTag() != null && !item.getTag().equals(tag))
+                continue;
+            if (item.getTag() == null && tag.size() != 0)
+                continue;
+            filteredItems.add(item);
+        }
+
+        invoiceItemRecyclerViewAdapter = new InvoiceItemRecyclerViewAdapter(filteredItems);
+        recyclerView.setAdapter(invoiceItemRecyclerViewAdapter);
     }
 
     private void initNachoTextView(Dialog dialog) {

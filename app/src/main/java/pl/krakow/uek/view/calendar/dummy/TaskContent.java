@@ -1,5 +1,7 @@
 package pl.krakow.uek.view.calendar.dummy;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -26,7 +28,8 @@ public class TaskContent {
     }
 
     private static TaskItem createItem(int position) {
-        return new TaskItem(1, "Umyć psa", false, new Date(), Collections.singletonList("tag"), true);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return new TaskItem(1, "Umyć psa", false, dateFormat.format(new Date()), Collections.singletonList("tag"), true);
     }
 
     private static String makeDetails(int position) {
@@ -39,20 +42,48 @@ public class TaskContent {
     }
 
     public static class TaskItem {
-        public final int id;
-        public final String name;
-        public final List<String> tag;
-        public final boolean finished;
-        public final Date date;
-        public final boolean notification;
+        private int id;
+        private String name;
+        private List<String> tag;
+        private boolean finished;
+        private String date;
+        private boolean notification;
 
-        public TaskItem(int id, String name, boolean finished, Date date, List<String> tag, boolean notification) {
+        public TaskItem() {
+
+        }
+
+        public TaskItem(int id, String name, boolean finished, String date, List<String> tag, boolean notification) {
             this.id = id;
             this.name = name;
             this.finished = finished;
             this.date = date;
             this.tag = tag;
             this.notification = notification;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public List<String> getTag() {
+            return tag;
+        }
+
+        public boolean getFinished() {
+            return finished;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public boolean getNotification() {
+            return notification;
         }
     }
 }

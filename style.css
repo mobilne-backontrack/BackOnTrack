@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'Lato-Light';
+  src: url('../Lato-Light.ttf');
+}
+
+@font-face {
+	font-family: 'Lato-Regular';
+	  src: url('../Lato-Regular.ttf');
+}
+
+/* SELEKTORY: */
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	color: #003868;
+	background-color: white;
+}
+
+blockquote {
+	text-align: justify;
+		font-size: 20pt;
+		font-family: Lato-Light;
+}
+
+.klasa1 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 30pt;
+}
+
+.klasa2 {
+	text-align: justify;
+	font-size: 20pt;
+}
+
+table {
+	font-size: 20pt;
+}

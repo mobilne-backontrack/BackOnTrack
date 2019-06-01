@@ -1,1 +1,1 @@
-This is a mobile app prototype built with Proto.io mobile app prototyping tool.
+This is a mobile app prototype.

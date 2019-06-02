@@ -18,11 +18,11 @@ import pl.krakow.uek.R;
 import pl.krakow.uek.view.calendar.dummy.TaskContent;
 import pl.krakow.uek.view.calendar.modify.ModifyTaskActivity;
 
-public class InvoiceItemRecyclerViewAdapter extends RecyclerView.Adapter<InvoiceItemRecyclerViewAdapter.ViewHolder> {
+public class TaskItemRecyclerViewAdapter extends RecyclerView.Adapter<TaskItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<TaskContent.TaskItem> values;
 
-    public InvoiceItemRecyclerViewAdapter(List<TaskContent.TaskItem> items) {
+    public TaskItemRecyclerViewAdapter(List<TaskContent.TaskItem> items) {
         values = items;
     }
 

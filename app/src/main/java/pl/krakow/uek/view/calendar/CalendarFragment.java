@@ -47,7 +47,7 @@ public class CalendarFragment extends Fragment {
     private CalendarView calendarView;
     public final static String ID = "id";
     private RecyclerView recyclerView;
-    private InvoiceItemRecyclerViewAdapter invoiceItemRecyclerViewAdapter;
+    private TaskItemRecyclerViewAdapter invoiceItemRecyclerViewAdapter;
 
     private FirebaseDatabase mFirebaseDatabase;
     private Query query;
@@ -118,7 +118,7 @@ public class CalendarFragment extends Fragment {
             items.add(item);
         }
 
-        invoiceItemRecyclerViewAdapter = new InvoiceItemRecyclerViewAdapter(items);
+        invoiceItemRecyclerViewAdapter = new TaskItemRecyclerViewAdapter(items);
         recyclerView.setAdapter(invoiceItemRecyclerViewAdapter);
     }
 
@@ -202,7 +202,7 @@ public class CalendarFragment extends Fragment {
             filteredItems.add(item);
         }
 
-        invoiceItemRecyclerViewAdapter = new InvoiceItemRecyclerViewAdapter(filteredItems);
+        invoiceItemRecyclerViewAdapter = new TaskItemRecyclerViewAdapter(filteredItems);
         recyclerView.setAdapter(invoiceItemRecyclerViewAdapter);
     }
 

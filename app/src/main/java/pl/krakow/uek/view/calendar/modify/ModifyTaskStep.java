@@ -1,5 +1,6 @@
 package pl.krakow.uek.view.calendar.modify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import pl.krakow.uek.MainActivity;
 import pl.krakow.uek.R;
 import pl.krakow.uek.customfont.LatoEditText;
 import pl.krakow.uek.customfont.LatoSwitch;
@@ -144,14 +146,13 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 if (id != null) {
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     TaskContent.TaskItem taskItem =
                             new TaskContent.TaskItem(id, taskNameEditText.getText().toString(), false, dateFormat.format(singleDateAndTimePicker.getDate()), nachoTextView.getChipValues(), notificationSwitch.isChecked());
                     mTasksDatabaseReference.child(id).setValue(taskItem);
                     Toast.makeText(getView().getContext(), "Task updated successfully!", Toast.LENGTH_SHORT).show();
                 } else {
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     id = mTasksDatabaseReference.push().getKey();
                     TaskContent.TaskItem taskItem =
                             new TaskContent.TaskItem(id, taskNameEditText.getText().toString(), false, dateFormat.format(singleDateAndTimePicker.getDate()), nachoTextView.getChipValues(), notificationSwitch.isChecked());
@@ -160,6 +161,8 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
                 }
 
                 callback.complete();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
             }
         }, 2000L);
     }

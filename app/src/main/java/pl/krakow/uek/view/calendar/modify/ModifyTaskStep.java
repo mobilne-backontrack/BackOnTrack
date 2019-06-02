@@ -125,7 +125,7 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
                         new TaskContent.TaskItem(1, taskNameEditText.getText().toString(), false, dateFormat.format(singleDateAndTimePicker.getDate()), nachoTextView.getChipValues(), notificationSwitch.isChecked());
                 mTasksDatabaseReference.push().setValue(taskItem);
 
-                Toast.makeText(getView().getContext(), "Zadanie zostało dodane!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getView().getContext(), "Task added successfully!", Toast.LENGTH_SHORT).show();
                 callback.complete();
             }
         }, 2000L);

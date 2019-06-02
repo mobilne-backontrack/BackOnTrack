@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hootsuite.nachos.NachoTextView;
@@ -42,6 +44,8 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mTasksDatabaseReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     @Nullable
     @Override
@@ -89,8 +93,10 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
     }
 
     private void initDatabase() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mTasksDatabaseReference = mFirebaseDatabase.getReference().child("taskItems");
+        mTasksDatabaseReference = mFirebaseDatabase.getReference().child("taskItems/" + firebaseUser.getUid());
     }
 
     @Nullable

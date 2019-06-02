@@ -15,8 +15,12 @@ import androidx.fragment.app.Fragment;
 import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.hootsuite.nachos.NachoTextView;
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
 import com.stepstone.stepper.BlockingStep;
@@ -46,6 +50,8 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
     private DatabaseReference mTasksDatabaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private Query query;
+    private String id;
 
     @Nullable
     @Override
@@ -53,8 +59,8 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
         View view = inflater.inflate(R.layout.fragment_modify_task, container, false);
         initNachoTextView(view);
         initFields(view);
-        initActivityValues();
         initDatabase();
+        initActivityValues();
         return view;
     }
 
@@ -75,20 +81,32 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
     }
 
     private void initActivityValues() {
-        int id = getActivity().getIntent().getIntExtra(CalendarFragment.ID, 0);
-        if (id == 0) {
-            return;
-        }
-        try {
-            TaskContent.TaskItem taskItem = TaskContent.ITEM_MAP.get(id);
-            nachoTextView.setText(taskItem.getTag());
-            taskNameEditText.setText(taskItem.getName());
-            notificationSwitch.setChecked(taskItem.getNotification());
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date date = dateFormat.parse(taskItem.getDate());
-            singleDateAndTimePicker.setDefaultDate(date);
-        } catch (Exception e) {
+        id = getActivity().getIntent().getStringExtra(CalendarFragment.ID);
+        if (id != null) {
+            query = mFirebaseDatabase.getReference().child("taskItems/" + firebaseUser.getUid()).orderByChild("id").equalTo(id);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        TaskContent.TaskItem item = ds.getValue(TaskContent.TaskItem.class);
+                        try {
+                            nachoTextView.setText(item.getTag());
+                            taskNameEditText.setText(item.getName());
+                            notificationSwitch.setChecked(item.getNotification());
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                            Date date = dateFormat.parse(item.getDate());
+                            singleDateAndTimePicker.setDefaultDate(date);
+                        } catch (Exception e) {
 
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 
@@ -126,12 +144,21 @@ public class ModifyTaskStep extends Fragment implements BlockingStep {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                TaskContent.TaskItem taskItem =
-                        new TaskContent.TaskItem(1, taskNameEditText.getText().toString(), false, dateFormat.format(singleDateAndTimePicker.getDate()), nachoTextView.getChipValues(), notificationSwitch.isChecked());
-                mTasksDatabaseReference.push().setValue(taskItem);
+                if (id != null) {
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    TaskContent.TaskItem taskItem =
+                            new TaskContent.TaskItem(id, taskNameEditText.getText().toString(), false, dateFormat.format(singleDateAndTimePicker.getDate()), nachoTextView.getChipValues(), notificationSwitch.isChecked());
+                    mTasksDatabaseReference.child(id).setValue(taskItem);
+                    Toast.makeText(getView().getContext(), "Task updated successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    id = mTasksDatabaseReference.push().getKey();
+                    TaskContent.TaskItem taskItem =
+                            new TaskContent.TaskItem(id, taskNameEditText.getText().toString(), false, dateFormat.format(singleDateAndTimePicker.getDate()), nachoTextView.getChipValues(), notificationSwitch.isChecked());
+                    mTasksDatabaseReference.child(id).setValue(taskItem);
+                    Toast.makeText(getView().getContext(), "Task added successfully!", Toast.LENGTH_SHORT).show();
+                }
 
-                Toast.makeText(getView().getContext(), "Task added successfully!", Toast.LENGTH_SHORT).show();
                 callback.complete();
             }
         }, 2000L);

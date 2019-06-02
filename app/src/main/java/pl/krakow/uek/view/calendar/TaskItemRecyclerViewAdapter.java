@@ -45,9 +45,9 @@ public class TaskItemRecyclerViewAdapter extends RecyclerView.Adapter<TaskItemRe
 
             @Override
             public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), ModifyTaskActivity.class);
+                Intent intent = new Intent(view.getContext(), ModifyTaskActivity.class);
                 intent.putExtra(CalendarFragment.ID, holder.mItem.getId());
-                    view.getContext().startActivity(intent);
+                view.getContext().startActivity(intent);
             }
         });
     }

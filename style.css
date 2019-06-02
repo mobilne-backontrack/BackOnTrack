@@ -10,7 +10,7 @@
 
 /* SELEKTORY: */
 body {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: Lato-Light;
 	font-size: 20pt;
 	color: #003868;
 	background-color: white;
@@ -35,4 +35,9 @@ blockquote {
 
 table {
 	font-size: 20pt;
+}
+
+.h1 {
+	font-family: 'Arial';
+	color: "blue"
 }

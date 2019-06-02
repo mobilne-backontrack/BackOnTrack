@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.List;
 
 import pl.krakow.uek.R;
-import pl.krakow.uek.view.calendar.InvoiceItemRecyclerViewAdapter;
+import pl.krakow.uek.view.calendar.TaskItemRecyclerViewAdapter;
 import pl.krakow.uek.view.calendar.dummy.TaskContent;
 
 public class TodayTasksFragment extends Fragment {
@@ -35,7 +35,7 @@ public class TodayTasksFragment extends Fragment {
     private RecyclerView recyclerView;
     private FirebaseDatabase mFirebaseDatabase;
     private Query query;
-    private InvoiceItemRecyclerViewAdapter invoiceItemRecyclerViewAdapter;
+    private TaskItemRecyclerViewAdapter taskItemRecyclerViewAdapter;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
 
@@ -80,8 +80,8 @@ public class TodayTasksFragment extends Fragment {
             items.add(item);
         }
 
-        invoiceItemRecyclerViewAdapter = new InvoiceItemRecyclerViewAdapter(items);
-        recyclerView.setAdapter(invoiceItemRecyclerViewAdapter);
+        taskItemRecyclerViewAdapter = new TaskItemRecyclerViewAdapter(items);
+        recyclerView.setAdapter(taskItemRecyclerViewAdapter);
     }
 
 }

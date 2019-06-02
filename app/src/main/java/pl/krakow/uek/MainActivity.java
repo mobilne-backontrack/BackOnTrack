@@ -3,6 +3,7 @@ package pl.krakow.uek;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -40,6 +41,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import pl.krakow.uek.util.PhotoPlusOcrUtil;
 import pl.krakow.uek.view.auth.signin.SignInActivity;
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initEngLanguage();
         setContentView(R.layout.activity_main);
         toolbarTitle = findViewById(R.id.toolbar_title);
         initToolbar();
@@ -257,5 +260,15 @@ public class MainActivity extends AppCompatActivity
 
     private boolean hasWritePermissions() {
         return (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private void initEngLanguage() {
+        String languageToLoad  = "en";
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
     }
 }

@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -21,6 +22,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.googlecode.tesseract.android.TessBaseAPI;
@@ -66,6 +73,9 @@ public class MainActivity extends AppCompatActivity
     Bitmap image;
     private TessBaseAPI mTess;
 
+    private FirebaseAuth firebaseAuth;
+    private GoogleSignInClient mGoogleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +83,7 @@ public class MainActivity extends AppCompatActivity
         toolbarTitle = findViewById(R.id.toolbar_title);
         initToolbar();
         initDrawer(savedInstanceState);
+        initFirebaseAuth();
         // OCR
         datapath = getFilesDir()+ "/tesseract/";
         PhotoPlusOcrUtil.checkFile(getAssets(), new File(datapath + "tessdata/"), datapath);
@@ -124,12 +135,14 @@ public class MainActivity extends AppCompatActivity
         adapter.setSelected(0);
     }
 
+    private void initFirebaseAuth() {
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
     @Override
     public void onItemSelected(int position) {
         if (menuItems[position] == DrawerMenuItem.SING_OUT) {
-            Intent intent = new Intent(this, SignInActivity.class);
-            startActivity(intent);
-            finish();
+            logOut();
         } else if (menuItems[position] == DrawerMenuItem.TODAY_TASKS) {
             Fragment todayTasksFragment = new TodayTasksFragment();
             showFragment(todayTasksFragment);
@@ -161,6 +174,32 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    private void logOut() {
+        initGoogleSignIn();
+        final Intent intent = new Intent(this, SignInActivity.class);
+
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        firebaseAuth.signOut();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+    }
+
+    private void initGoogleSignIn() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
     @Override

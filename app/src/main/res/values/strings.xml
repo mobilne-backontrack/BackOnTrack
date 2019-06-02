@@ -3,6 +3,7 @@
 
     <!-- LOGIN AND REGISTRATION -->
     <string name="sign_in">Sign in</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_out">Sign Out</string>
     <string name="username">Username</string>

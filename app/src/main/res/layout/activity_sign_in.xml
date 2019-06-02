@@ -46,11 +46,11 @@
             android:layout_height="wrap_content">
 
             <pl.krakow.uek.customfont.LatoEditText
-                android:id="@+id/username"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/invisible"
-                android:hint="@string/username"
+                android:hint="@string/email"
                 android:inputType="text"
                 android:paddingLeft="@dimen/layout_text_margin"
                 android:paddingStart="@dimen/layout_text_margin"
@@ -107,6 +107,19 @@
             android:onClick="signInButtonListener"
             android:padding="@dimen/long_padding"
             android:text="@string/sign_in"
+            android:textColor="@color/colorButtonText"
+            android:textStyle="bold" />
+
+        <pl.krakow.uek.customfont.LatoTextView
+            android:id="@+id/cg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/round"
+            android:gravity="center"
+            android:onClick="signInGoogleButtonListener"
+            android:padding="@dimen/long_padding"
+            android:text="@string/sign_in_with_google"
             android:textColor="@color/colorButtonText"
             android:textStyle="bold" />
 

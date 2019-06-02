@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -51,6 +53,8 @@ public class CalendarFragment extends Fragment {
 
     private FirebaseDatabase mFirebaseDatabase;
     private Query query;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     @Nullable
     @Override
@@ -95,8 +99,10 @@ public class CalendarFragment extends Fragment {
     }
 
     private void initDatabase(String date) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        query = mFirebaseDatabase.getReference().child("taskItems").orderByChild("date").startAt(date).endAt(date + "\uf8ff");
+        query = mFirebaseDatabase.getReference().child("taskItems/" + firebaseUser.getUid()).orderByChild("date").startAt(date).endAt(date + "\uf8ff");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -173,7 +179,7 @@ public class CalendarFragment extends Fragment {
 
     private void initDatabaseByFilter(String name, final boolean notification, final List<String> tag) {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        query = mFirebaseDatabase.getReference().child("taskItems").orderByChild("name").equalTo(name);
+        query = mFirebaseDatabase.getReference().child("taskItems/" + firebaseUser.getUid()).orderByChild("name").equalTo(name);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

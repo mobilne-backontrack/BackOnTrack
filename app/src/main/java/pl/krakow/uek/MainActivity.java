@@ -29,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.googlecode.tesseract.android.TessBaseAPI;
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity
     private TessBaseAPI mTess;
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity
 
     private void initFirebaseAuth() {
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
     }
 
     @Override
@@ -220,7 +223,7 @@ public class MainActivity extends AppCompatActivity
 
                 // saving text to database as new task item
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference mTasksDatabaseReference = database.getReference().child("taskItems");
+                DatabaseReference mTasksDatabaseReference = database.getReference().child("taskItems/" + firebaseUser.getUid());
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 TaskContent.TaskItem taskItem =
                         new TaskContent.TaskItem(1, text, false, dateFormat.format(new Date()), new ArrayList<String>(), false);

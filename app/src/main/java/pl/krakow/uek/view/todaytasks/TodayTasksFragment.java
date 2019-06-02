@@ -57,8 +57,10 @@ public class TodayTasksFragment extends Fragment {
     }
 
     private void initDatabase(String date) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        query = mFirebaseDatabase.getReference().child("taskItems").orderByChild("date").startAt(date).endAt(date + "\uf8ff");
+        query = mFirebaseDatabase.getReference().child("taskItems/" + firebaseUser.getUid()).orderByChild("date").startAt(date).endAt(date + "\uf8ff");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

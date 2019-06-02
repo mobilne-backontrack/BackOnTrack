@@ -38,8 +38,4 @@
     <string name="notification">Notification</string>
     <string name="filter">Filter</string>
 
-    <!-- TASK -->
-    <string name="action_settings">Settings</string>
-    <string name="taskName">Wpisz nazwę zadania</string>
-
 </resources>

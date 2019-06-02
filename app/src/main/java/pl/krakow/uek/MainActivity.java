@@ -225,9 +225,10 @@ public class MainActivity extends AppCompatActivity
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference mTasksDatabaseReference = database.getReference().child("taskItems/" + firebaseUser.getUid());
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                String id = mTasksDatabaseReference.push().getKey();
                 TaskContent.TaskItem taskItem =
-                        new TaskContent.TaskItem(1, text, false, dateFormat.format(new Date()), new ArrayList<String>(), false);
-                mTasksDatabaseReference.push().setValue(taskItem);
+                        new TaskContent.TaskItem(id, text, false, dateFormat.format(new Date()), new ArrayList<String>(), false);
+                mTasksDatabaseReference.child(id).setValue(taskItem);
                 Log.i("OCR", "ocr task has been added");
 
             }

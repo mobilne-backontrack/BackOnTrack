@@ -12,7 +12,7 @@ import java.util.Map;
 public class TaskContent {
 
     public static final List<TaskItem> ITEMS = new ArrayList<>();
-    public static final Map<Integer, TaskItem> ITEM_MAP = new HashMap<>();
+    public static final Map<String, TaskItem> ITEM_MAP = new HashMap<>();
 
     private static final int COUNT = 25;
 
@@ -29,7 +29,7 @@ public class TaskContent {
 
     private static TaskItem createItem(int position) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        return new TaskItem(1, "Umyć psa", false, dateFormat.format(new Date()), Collections.singletonList("tag"), true);
+        return new TaskItem("1", "Umyć psa", false, dateFormat.format(new Date()), Collections.singletonList("tag"), true);
     }
 
     private static String makeDetails(int position) {
@@ -42,7 +42,7 @@ public class TaskContent {
     }
 
     public static class TaskItem {
-        private int id;
+        private String id;
         private String name;
         private List<String> tag;
         private boolean finished;
@@ -53,7 +53,7 @@ public class TaskContent {
 
         }
 
-        public TaskItem(int id, String name, boolean finished, String date, List<String> tag, boolean notification) {
+        public TaskItem(String id, String name, boolean finished, String date, List<String> tag, boolean notification) {
             this.id = id;
             this.name = name;
             this.finished = finished;
@@ -62,7 +62,7 @@ public class TaskContent {
             this.notification = notification;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
@@ -84,6 +84,10 @@ public class TaskContent {
 
         public boolean getNotification() {
             return notification;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
     }
 }
